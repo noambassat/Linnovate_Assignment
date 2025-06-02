@@ -1,0 +1,5 @@
+venv/
+*.mp4
+*.mov
+input_data/video_files/
+input_data/temp_segments/
