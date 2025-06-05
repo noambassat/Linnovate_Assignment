@@ -10,10 +10,11 @@ function App() {
 
     try {
       const response = await fetch('/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query, top_k: 3 })
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query, top_k: 3 })
       })
+
 
       if (!response.ok) {
         throw new Error('Request failed')
