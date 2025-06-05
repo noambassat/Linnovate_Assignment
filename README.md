@@ -6,6 +6,24 @@ This project extracts descriptive highlights from videos using a Large Language 
 
 ---
 
+## Workflow
+
+```mermaid
+Video File
+   ↓
+Split into 5-sec Segments
+   ↓
+Extract Middle Frame (Image)
+   ↓
+Send to GPT-4o → Get Description
+   ↓
+Embed Description (text-embedding-3-small)
+   ↓
+Save to PostgreSQL (with pgvector)
+   ↓
+User asks question → Embed it → Search similar vectors → Return matching segments
+```
+
 ## Features
 
 -  LLM-based description for visual content (no audio).
