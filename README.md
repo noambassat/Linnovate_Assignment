@@ -26,13 +26,13 @@ User asks question → Embed it → Search similar vectors → Return matching s
 
 ## Features
 
--  LLM-based description for visual content (no audio).
--  Video segmentation using `moviepy`.
--  Storage of metadata and embeddings in PostgreSQL with `pgvector`.
--  Semantic similarity search over highlights.
--  Clean modular architecture (OOP).
--  Dockerized environment for both backend and frontend.
--  Interactive React frontend for asking questions about the video content.
+- LLM-based description for visual content (no audio).
+- Video segmentation using `moviepy`.
+- Storage of metadata and embeddings in PostgreSQL with `pgvector`.
+- Semantic similarity search over highlights.
+- Clean modular architecture (OOP).
+- Dockerized environment for both backend and frontend.
+- Interactive React frontend for asking questions about the video content.
 
 ---
 
@@ -112,6 +112,8 @@ Place at least two `.mp4` or `.mov` files (30–90 seconds each) into:
 input_data/video_files/
 ```
 
+If the files are too large to include in the repository, see the section below for external hosting.
+
 ### 3. Create a .env file
 ```env
 OPENAI_API_KEY=your-api-key-here
@@ -122,8 +124,8 @@ OPENAI_API_KEY=your-api-key-here
 docker-compose up --build
 ```
 
-- FastAPI will be available at: [http://localhost:8000/docs](http://localhost:8000/docs)
-- UI will be available at: [http://localhost:3000](http://localhost:3000)
+- FastAPI will be available at: http://localhost:8000/docs
+- UI will be available at: http://localhost:3000
 
 ---
 
@@ -194,3 +196,20 @@ CREATE TABLE IF NOT EXISTS highlights (
 - Chat is powered by semantic search only (no LLM call during chat)
 
 ---
+
+## Demo Videos
+
+Due to file size limitations on GitHub, the input videos are hosted externally.
+
+You can access and download the required video files from this folder:
+
+https://drive.google.com/drive/folders/1B2FQkMrVHcpoZFO3oVzSZHk9b1XDoxNz?usp=drive_link
+
+Place them manually in the directory:
+
+```
+input_data/video_files/
+```
+
+---
+
