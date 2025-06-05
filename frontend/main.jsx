@@ -8,11 +8,12 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const response = await fetch('/chat', {
+    const response = await fetch('http://backend:8000/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query, top_k: 3 })
     })
+
 
     const data = await response.json()
     setResults(data.matches)
