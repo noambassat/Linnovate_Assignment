@@ -5,7 +5,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/chat': 'http://backend:8000'
+      '/chat': {
+        target: 'http://backend:8000',
+        changeOrigin: true,
+        secure: false
+      }
     }
   }
 })
