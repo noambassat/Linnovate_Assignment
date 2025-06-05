@@ -1,3 +1,4 @@
+# app/db/pgvector_client.py
 import psycopg2
 import os
 from app.utils.embedding import get_embedding

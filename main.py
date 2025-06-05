@@ -16,8 +16,8 @@ def main():
         return
 
     # ----- Step 1: Segment the videos -----
-    for video_path in video_files:
-        process_video(video_path, SEGMENTS_DIR)
+    # for video_path in video_files:
+    #     process_video(video_path, SEGMENTS_DIR)
 
     # ----- Step 2: Extract Highlights with LLM -----
     for video_path in video_files:

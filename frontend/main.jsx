@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 
@@ -6,27 +7,32 @@ function App() {
   const [results, setResults] = useState([])
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+      e.preventDefault()
 
-    try {
-      const response = await fetch('/chat', {
+      console.log('Sending query:', query)
+
+      try {
+        const response = await fetch('/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ query, top_k: 3 })
-      })
+        })
 
+        console.log('Got response:', response)
 
-      if (!response.ok) {
-        throw new Error('Request failed')
+        if (!response.ok) {
+          throw new Error('Request failed')
+        }
+
+        const data = await response.json()
+        console.log('Parsed data:', data)
+        setResults(data.matches)
+      } catch (err) {
+        console.error('Error:', err)
+        alert('Request failed. See console for details.')
       }
-
-      const data = await response.json()
-      setResults(data.matches)
-    } catch (err) {
-      console.error('Error:', err)
-      alert('Request failed. See console for details.')
     }
-  }
+
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
