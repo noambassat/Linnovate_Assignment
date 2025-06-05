@@ -1,4 +1,3 @@
-
 version: '3.9'
 
 services:
@@ -16,7 +15,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/sql:/docker-entrypoint-initdb.d
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -36,6 +35,14 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
     depends_on:
       - postgres
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:
