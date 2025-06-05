@@ -2,9 +2,8 @@ import psycopg2
 import os
 from app.utils.embedding import get_embedding
 
-
 def get_similar_highlights(query: str, top_k: int = 3):
-    query_embedding = get_embedding(query)
+    embedding = get_embedding(query)
 
     conn = psycopg2.connect(
         host=os.getenv("DB_HOST", "localhost"),
@@ -16,23 +15,23 @@ def get_similar_highlights(query: str, top_k: int = 3):
     cur = conn.cursor()
 
     cur.execute("""
-        SELECT segment_path, description, llm_summary, timestamp
+        SELECT video_id, segment_path, timestamp, description, llm_summary
         FROM highlights
-        ORDER BY embedding <-> %s
-        LIMIT %s;
-    """, (query_embedding, top_k))
+        ORDER BY embedding <-> %s::vector
+        LIMIT %s
+    """, (embedding, top_k))
 
-    results = cur.fetchall()
+    results = [
+        {
+            "video_id": row[0],
+            "segment_path": row[1],
+            "timestamp": row[2],
+            "description": row[3],
+            "summary": row[4]
+        }
+        for row in cur.fetchall()
+    ]
+
     cur.close()
     conn.close()
-
-    return [
-        {
-            "segment": row[0],
-            "description": row[1],
-            "summary": row[2],
-            "timestamp": row[3]
-        }
-        for row in results
-    ]
-# This function retrieves similar video highlights based on a text query using vector similarity search.
+    return results
